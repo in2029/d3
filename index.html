@@ -1,83 +1,910 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+<meta charset="utf-8">
+<style>
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+.node {
+/*  stroke: #fff;
+  stroke-width: 1.5px;*/
+}
 
-    <title>D3 by in2029</title>
-  </head>
+.link {
+/*  fill: none;
+  stroke: #bbb;*/
+  fill: none;
+/*  stroke: #666;*/
+  stroke-width: 0.5px;
+}
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>D3</h1>
-        <h2></h2>
-        <a href="https://github.com/in2029/d3" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+text {
+  pointer-events: none;
+/*  font: 12px normal;*/
+  font:  12px normal "宋体",Arial,Times;
+  fill:  white;
+}
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    	<style></style>
+	    		<script>var width = 1060,
+	height = 900;
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+var color = d3.scale.category10();
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+var force = d3.layout.force().linkDistance(100).linkStrength(2).charge(-300).size([width, height]);
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+// 背景
+    d3.select("body").transition().style("background-color", "#000");
+		d3.select("body").append("span").text("Hello, This is a Demo ");
+var graph = {
+	"links": [{
+		"source": "0",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "2",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "4",
+		"target": "5",
+		"value": "2"
+	}, {
+		"source": "6",
+		"target": "7",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "1",
+		"value": "1"
+	}, {
+		"source": "9",
+		"target": "10",
+		"value": "2"
+	}, {
+		"source": "11",
+		"target": "12",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "5",
+		"value": "1"
+	}, {
+		"source": "13",
+		"target": "14",
+		"value": "2"
+	}, {
+		"source": "15",
+		"target": "16",
+		"value": "2"
+	}, {
+		"source": "17",
+		"target": "18",
+		"value": "2"
+	}, {
+		"source": "19",
+		"target": "12",
+		"value": "2"
+	}, {
+		"source": "20",
+		"target": "21",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "22",
+		"value": "1"
+	}, {
+		"source": "17",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "4",
+		"target": "23",
+		"value": "2"
+	}, {
+		"source": "24",
+		"target": "13",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "25",
+		"value": "1"
+	}, {
+		"source": "26",
+		"target": "27",
+		"value": "2"
+	}, {
+		"source": "28",
+		"target": "29",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "13",
+		"value": "1"
+	}, {
+		"source": "11",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "30",
+		"value": "1"
+	}, {
+		"source": "5",
+		"target": "22",
+		"value": "2"
+	}, {
+		"source": "31",
+		"target": "32",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "15",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "2",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "33",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "27",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "11",
+		"value": "1"
+	}, {
+		"source": "2",
+		"target": "23",
+		"value": "2"
+	}, {
+		"source": "34",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "32",
+		"target": "21",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "26",
+		"value": "2"
+	}, {
+		"source": "2",
+		"target": "19",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "2",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "20",
+		"target": "35",
+		"value": "2"
+	}, {
+		"source": "2",
+		"target": "34",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "36",
+		"value": "1"
+	}, {
+		"source": "6",
+		"target": "10",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "37",
+		"value": "1"
+	}, {
+		"source": "19",
+		"target": "26",
+		"value": "2"
+	}, {
+		"source": "11",
+		"target": "29",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "0",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "38",
+		"value": "1"
+	}, {
+		"source": "20",
+		"target": "39",
+		"value": "2"
+	}, {
+		"source": "27",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "31",
+		"target": "39",
+		"value": "2"
+	}, {
+		"source": "40",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "36",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "12",
+		"target": "26",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "17",
+		"value": "1"
+	}, {
+		"source": "41",
+		"target": "42",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "35",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "29",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "43",
+		"value": "1"
+	}, {
+		"source": "0",
+		"target": "27",
+		"value": "2"
+	}, {
+		"source": "44",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "44",
+		"value": "1"
+	}, {
+		"source": "40",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "24",
+		"target": "41",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "3",
+		"value": "1"
+	}, {
+		"source": "34",
+		"target": "5",
+		"value": "2"
+	}, {
+		"source": "19",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "5",
+		"target": "45",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "9",
+		"value": "1"
+	}, {
+		"source": "5",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "30",
+		"target": "19",
+		"value": "2"
+	}, {
+		"source": "3",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "32",
+		"value": "1"
+	}, {
+		"source": "12",
+		"target": "25",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "31",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "26",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "45",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "42",
+		"value": "1"
+	}, {
+		"source": "28",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "34",
+		"target": "27",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "12",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "4",
+		"value": "1"
+	}, {
+		"source": "0",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "32",
+		"target": "39",
+		"value": "2"
+	}, {
+		"source": "26",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "46",
+		"value": "1"
+	}, {
+		"source": "12",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "19",
+		"value": "2"
+	}, {
+		"source": "11",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "11",
+		"target": "34",
+		"value": "2"
+	}, {
+		"source": "3",
+		"target": "22",
+		"value": "2"
+	}, {
+		"source": "5",
+		"target": "42",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "11",
+		"value": "2"
+	}, {
+		"source": "35",
+		"target": "21",
+		"value": "2"
+	}, {
+		"source": "2",
+		"target": "27",
+		"value": "2"
+	}, {
+		"source": "0",
+		"target": "12",
+		"value": "2"
+	}, {
+		"source": "31",
+		"target": "21",
+		"value": "2"
+	}, {
+		"source": "19",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "16",
+		"value": "1"
+	}, {
+		"source": "3",
+		"target": "26",
+		"value": "2"
+	}, {
+		"source": "29",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "40",
+		"value": "1"
+	}, {
+		"source": "15",
+		"target": "13",
+		"value": "2"
+	}, {
+		"source": "12",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "46",
+		"target": "18",
+		"value": "2"
+	}, {
+		"source": "34",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "41",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "10",
+		"value": "1"
+	}, {
+		"source": "19",
+		"target": "27",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "39",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "6",
+		"value": "1"
+	}, {
+		"source": "35",
+		"target": "31",
+		"value": "2"
+	}, {
+		"source": "28",
+		"target": "37",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "23",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "47",
+		"value": "1"
+	}, {
+		"source": "11",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "14",
+		"value": "1"
+	}, {
+		"source": "24",
+		"target": "4",
+		"value": "2"
+	}, {
+		"source": "28",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "19",
+		"value": "1"
+	}, {
+		"source": "41",
+		"target": "13",
+		"value": "2"
+	}, {
+		"source": "16",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "26",
+		"target": "17",
+		"value": "2"
+	}, {
+		"source": "3",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "13",
+		"target": "45",
+		"value": "2"
+	}, {
+		"source": "41",
+		"target": "15",
+		"value": "2"
+	}, {
+		"source": "20",
+		"target": "32",
+		"value": "2"
+	}, {
+		"source": "42",
+		"target": "45",
+		"value": "2"
+	}, {
+		"source": "22",
+		"target": "28",
+		"value": "2"
+	}, {
+		"source": "20",
+		"target": "31",
+		"value": "2"
+	}, {
+		"source": "11",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "19",
+		"target": "1",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "34",
+		"value": "1"
+	}, {
+		"source": "35",
+		"target": "39",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "18",
+		"value": "1"
+	}, {
+		"source": "12",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "24",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "20",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "48",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "21",
+		"value": "1"
+	}, {
+		"source": "8",
+		"target": "28",
+		"value": "1"
+	}, {
+		"source": "24",
+		"target": "10",
+		"value": "2"
+	}, {
+		"source": "35",
+		"target": "32",
+		"value": "2"
+	}, {
+		"source": "34",
+		"target": "3",
+		"value": "2"
+	}, {
+		"source": "21",
+		"target": "39",
+		"value": "2"
+	}, {
+		"source": "40",
+		"target": "22",
+		"value": "2"
+	}, {
+		"source": "41",
+		"target": "10",
+		"value": "2"
+	}, {
+		"source": "8",
+		"target": "7",
+		"value": "1"
+	}],
+	"nodes": [{
+		"count": 10,
+		"group": "2",
+		"name": "金容君-邻家王子"
+	}, {
+		"count": 9,
+		"group": "2",
+		"name": "王一鹤_"
+	}, {
+		"count": 7,
+		"group": "2",
+		"name": "官方微博"
+	}, {
+		"count": 13,
+		"group": "2",
+		"name": "沈永阁"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "肖飞"
+	}, {
+		"count": 7,
+		"group": "2",
+		"name": "中山邦夫"
+	}, {
+		"count": 3,
+		"group": "2",
+		"name": "April"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "香蕉"
+	}, {
+		"count": 15,
+		"group": "1",
+		"name": "qfei"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "岩井俊二"
+	}, {
+		"count": 5,
+		"group": "2",
+		"name": "彭浩翔"
+	}, {
+		"count": 9,
+		"group": "2",
+		"name": "Y-star小?哥"
+	}, {
+		"count": 9,
+		"group": "2",
+		"name": "张佑荣"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "杨幂"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "刘春"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "张晗"
+	}, {
+		"count": 3,
+		"group": "2",
+		"name": "王才涛"
+	}, {
+		"count": 12,
+		"group": "2",
+		"name": "赵元?-邻家王子"
+	}, {
+		"count": 3,
+		"group": "2",
+		"name": "左疼右爱_佐藤?"
+	}, {
+		"count": 10,
+		"group": "2",
+		"name": "竹书娱乐"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "MP魔幻力量廷廷"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "MP魔幻力量嘎嘎"
+	}, {
+		"count": 5,
+		"group": "2",
+		"name": "松冈"
+	}, {
+		"count": 3,
+		"group": "2",
+		"name": "何大叶"
+	}, {
+		"count": 5,
+		"group": "2",
+		"name": "?承?"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "侯琳飞"
+	}, {
+		"count": 8,
+		"group": "2",
+		"name": "邻家王子组合"
+	}, {
+		"count": 7,
+		"group": "2",
+		"name": "小揪儿"
+	}, {
+		"count": 15,
+		"group": "2",
+		"name": "程_孝明"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "9111NINA"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "张阿牧"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "MP魔幻力量鼓手阿翔"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "MP魔幻力量??"
+	}, {
+		"count": 1,
+		"group": "2",
+		"name": "山田尚"
+	}, {
+		"count": 8,
+		"group": "2",
+		"name": "服装师喜一"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "MP魔幻力量雷堡"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "梅派-胡文阁"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "魔女mok"
+	}, {
+		"count": 1,
+		"group": "2",
+		"name": "多多罗文化"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "啦啦啦啦啦"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "松冈伸弥"
+	}, {
+		"count": 6,
+		"group": "2",
+		"name": "王中磊"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "myc"
+	}, {
+		"count": 1,
+		"group": "2",
+		"name": "马戎戎"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "MIYAVI_OFFICIAL"
+	}, {
+		"count": 4,
+		"group": "2",
+		"name": "欧弟"
+	}, {
+		"count": 2,
+		"group": "2",
+		"name": "李缨电影"
+	}, {
+		"count": 1,
+		"group": "2",
+		"name": "balabala"
+	}, {
+		"count": 1,
+		"group": "2",
+		"name": "benylan"
+	}]
+}
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+var nodes = graph.nodes.slice(),
+	links = [],
+	bilinks = [];
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+graph.links.forEach(function(link) {
+	var s = nodes[link.source],
+		t = nodes[link.target],
+		i = {}; // intermediate node
+    v = link.value;
+	nodes.push(i);
+	links.push({
+		source: s,
+		target: i
+	}, {
+		source: i,
+		target: t
+	});
+	bilinks.push([s, i, t ,v ]);
+});
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+force.nodes(nodes).links(links).start();
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+var link = svg.selectAll(".link").data(bilinks)
+                  .enter().append("path")
+                  .attr("class","link")
+                  .style("stroke", function(d) { 
+                    //console.log(d);
+                    if(d[3] != null) { 
+                      if(d[3] == "1"){
+                      //  console.log(d[3]);
+                        return color("1");
+                      }else{
+                        return color("2");
+                      }
+                    }; 
+                  });
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+var node = svg.selectAll(".node").data(graph.nodes)
+                  .enter().append("g")
+                  .attr("class", "node")
+                  .call(force.drag);
 
-        <aside id="sidebar">
-          <a href="https://github.com/in2029/d3/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/in2029/d3/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+              //小圆   2.5-7.5
+              node.append("circle").attr("class", "node")
+              .attr("r", function(d){
+                console.log(d.count/2)
+                if(d.count/2<2){
+                  return 2.5;
+                }else{
+                  return d.count/2;
+                }
+              })              
+              .style("fill", function(d) {
+          //      console.log(d);
+          //      return color(d.group);
+                return color(d.count+"")
+              });
 
-          <p class="repo-owner"><a href="https://github.com/in2029/d3"></a> is maintained by <a href="https://github.com/in2029">in2029</a>.</p>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+node.append("text")
+                .attr("dx", 12)
+                .attr("dy",".35em")
+                .attr("class","text")
+                .text(function(d) {
+                return d.name
+              });
 
-  
-  </body>
-</html>
+force.on("tick", function() {
+                link.attr("d", function(d) {
+                  return "M" + d[0].x + "," + d[0].y + "S"
+                      + d[1].x + "," + d[1].y + " "
+                      + d[2].x + "," + d[2].y;
+                });
+                node.attr("transform",function(d) {
+                  return "translate(" + d.x + "," + d.y + ")";
+                });
+              });
+// });</script>
+
